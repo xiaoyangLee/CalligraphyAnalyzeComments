@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>开始操作图片</title>
+	<script type="text/javascript" src = "js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src = "js/util.js"></script>
+	<script type="text/javascript">
+		function coverImg() {
+			var t = this;
+			var c = document.getElementById("myCanvas");
+			var ctx = c.getContext("2d");
+			ctx.fillStyle = "rgba(0,0,0,0.5)";
+			ctx.fillRect(0,0,1000,300);
+
+		}
+	</script>
+</head>
+<body onload="loadImg();">
+<!-- <p><h3>原始图片：</h3></p> -->
+<!-- <img id="timg" src="../images/timg.jpg" width="1000px" /> -->
+<br>
+<h3>放到Canvas里的图片：</h3><button onclick="coverImg();" style="margin-bottom: 20px">选择</button>
+<div onmousemove="cnvs_getCoordinates(event)" onmouseout="cnvs_clearCoordinates()">
+<canvas id="myCanvas" width="1000px" height="320px" style="border:1px solid #d3d3d3;">
+您的浏览器不支持 HTML5 canvas 标签。</canvas>
+</div>
+<div id = "xy"></div>
+
+</body>
+</html>
