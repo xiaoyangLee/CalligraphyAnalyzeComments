@@ -7,25 +7,29 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.Jcrop.js"></script>
 <script type="text/javascript">
-    //showPre方法用于显示预览图
-  function showPre() {
-    //alert("点击了Pre");
-    document.getElementById("imgp").attributes['src'].value="../images/dog.jpg";
-//      document.getElementById("imgp").style.clip="rect(0,100px,100px,0)";
-
-  }
-
 
   jQuery(function($){
 
     var jcrop_api;
+    var boundx,boundy;
+    var $preview = $('#preview-pane'),
+            $pcnt = $('#preview-pane .preview'),
+            $pimg = $('#preview-pane .preview img');
+    var  xsize = $pcnt.width(),
+            ysize = $pcnt.height();
 
     $('#target').Jcrop({
       onChange:   showCoords,
       onSelect:   showCoords,
       onRelease:  clearCoords
     },function(){
+      var bounds = this.getBounds();
+      boundx = bounds[0];
+      boundy = bounds[1];
+
       jcrop_api = this;
+
+//      $preview.appendTo(jcrop_api.ui.holder);
     });
 
     $('#coords').on('change','input',function(e){
@@ -49,13 +53,19 @@
     $('#w').val(c.w);
     $('#h').val(c.h);
       //执行showPre()方法显示预览图
-      showPre();
+      showPre(c);
   };
 
   function clearCoords()
   {
     $('#coords input').val('');
   };
+
+  //showPre方法用于显示预览图
+  function showPre(c) {
+    document.getElementById("imgp").attributes['src'].value="../images/dog.jpg";
+  };
+
 
 </script>
 <link rel="stylesheet" href="css/main.css" type="text/css" />
@@ -65,7 +75,6 @@
 <style type="text/css">
 	.img{
 		width: 850px;
-
 	}
     .table{
       width:890px;
@@ -92,8 +101,10 @@
 <div class="container">
 <div class="row">
 <div class="span12">
-  <div class="preview" onmouseover="clickPre();">
+  <div id="preview-pane">
+  <div class="preview">
     <img src=" " class="imgpre" id="imgp"/>
+  </div>
   </div>
 <div class="jc-demo-box">
 
